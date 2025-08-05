@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "preis-api-prototyp",
+  "private_key_id": "89af6d23748315a59d28856ca29a3087a5f702a7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDGh3nyYRawgkm3\nUu1R+EEn2rHkoW6FUxHt9GEwnC5PS03fbxfvmdeWa+BJwNN9PaLaGihALiqKICF9\nYeI0z8Z3mSv/sXAKGmLyFUGBkqGNEJsZbJWvOQzLLptdwRsVTfEc6uPFNg9CYSPc\nND0SDW4PD5877nQ+Z9d1US3fGGtd6EbY3T1RkY8s6TwCyZhDQM9oT/8Z8+oelUBy\nH9hHkwYGgz4qCmKOEsIY+mjAfymqIY4rtp8YDx8N8H4k3GV6vSQmGnz9RFw0psqL\ntShoVuq3H09WKE1VvvNGiDT940iFS9a51DD0AYEoXGYG6Os9DXYM7bC/mw2H5euA\n9VddvJ8xAgMBAAECggEAO6dktLiItVQI632PEwTaKywTLSR2zbgG2K4IcC9V2PzD\nMwKyOgxLlAbpN7ApvGXDY+7dLl/Q5309IuxBKOZP+Ar+BhBenqKMHbrWWqVhRr55\nJFwU5DhryDfCdpr6VN39N9e6xjz2u9btjBLkUOLZMcxbaApAQqo4Oye/9Vvkkywb\nNo0jfbIgUtxg/wD1+TC99AHie/NjWFRnfmLldOiiOTfewVVv2dOcgTl68GoNbEiD\n9pOpJ6ACrDsxU6XnfXELL6oWmRG5rBdxxkfIt03JQDBNAOIZZR52YhYisqjwomF4\nucqwPNxUojkKYn104iixnJLpW0CoRLaESYXWawS8QwKBgQDvhRvCr4eW+yeXppK0\nywqcII1Yss7OJzY/7dZfkJh5JF0yTzdzKfJAmbLJ1GKTOsxqKehB3EhdPBHwOaZb\nPOHCmWFA7yQZG1VsO9EvcACMHLS7OLabZZ3dWu1SCxe484y2Xk/9s7W53GV9GrXt\nQfj+gov5MTYrI8zmIL2cQDe3xwKBgQDUMFvqvvtMhKkUpEKgs0Rwl0oH4nT4Wa3t\nMfXRxDR03+KrFmtc3BB1rrQYmj0TkTsFTNb65745rpbl+BChjj9rf5cS8pGPMi9h\nyV+iRdRgaRZvNLtoQHu6KqXNfqpeSgS2nPPPawGWmuJrsB9RheDrP7rJW3/Yhpop\nZ4xKE6ghRwKBgDqag99PmUpMqzREslJ/91mZ8VuJbGYuW+yqYbBCLbw+NHtRvIx1\n7+r0cDVHvNKvKUK0fDpZDm+Zef4f7N8X91jotE3x9RAbivwParBDpC6j+2hviOZe\np5B4ZeaUBjrfhEc+ri2x4b3W+hHxDiA96xFCmcLf0pQdj02jJyFq6PcTAoGBAMAr\nk/OER9/C/caeBWG5ObCms/t0Eu+heK2rY7A4/DElWwoL4exVuep68MyfU9VW4Jcq\nQkE2hMeE4VEhWx6Vz8Yx5cbZPQ7tKpBralty1qcCRbktjtUaIXQ3j7YOk4mVi7M/\nbmhZxzR4zbst5Q9WKp+kNiyK27xkG1aIWzvzlX+dAoGBAKe7dVmdzA8Miy5XuzI7\nLa8/QzhMT4eCmIY0OlntvMnVUELwQRtrF/gOxSdQxc2lJFIENKxMtfAAPwhLxvvv\nynjMBU7AyQQbQA1IKyzoniH61roapfFRrpKZDsB6/OHgtf212IK9AsDD24D4FOCT\n/mW4ghnOgVFlai7k8UxGuOTa\n-----END PRIVATE KEY-----\n",
+  "client_email": "preisapi-service@preis-api-prototyp.iam.gserviceaccount.com",
+  "client_id": "101008962953202500001",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/preisapi-service%40preis-api-prototyp.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

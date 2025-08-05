@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Cloud Preisübersicht</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta http-equiv="refresh" content="600">
+</head>
+<body>
+    <h1>Cloud Preisübersicht</h1>
+    <p>🕒 Letzte Aktualisierung: {{ last_updated }}</p>
+    <form method="get" action="/">
+        <label for="provider">Anbieter:</label>
+        <input type="text" id="provider" name="provider" value="{{ request.args.get('provider', '') }}">
+
+        <label for="service">Service:</label>
+        <input type="text" id="service" name="service" value="{{ request.args.get('service', '') }}">
+
+        <label for="sku">SKU:</label>
+        <input type="text" id="sku" name="sku" value="{{ request.args.get('sku', '') }}">
+
+        <label for="resource">Resource Name:</label>
+        <input type="text" id="resource" name="resource" value="{{ request.args.get('resource', '') }}">
+
+        <button type="submit">🔍 Filtern</button>
+        <button type="button" onclick="window.location.href='/'" style="margin-left: 10px;">
+            Alle Filter zurücksetzen
+        </button>
+
+        <button type="button" onclick="clearSelection()" style="margin-left: 10px;">
+            Auswahl zurücksetzen
+        </button>
+
+
+    </form>
+    <div style="margin: 20px 0;">
+        <a href="{{ url_for('download_csv', **request.args) }}" class="btn">CSV herunterladen</a>
+        <a href="{{ url_for('download_pdf', **request.args) }}" class="btn">PDF herunterladen</a>
+    </div>
+
+    <form id="compareForm" method="get" action="/compare" target="_blank">
+        <button type="submit" id="compareBtn" disabled style="
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        ">🔍 Vergleich</button>
+    </form>
+
+
+    <form id="compareForm" method="get" action="/compare" target="_blank">
+    <table>
+        <tr>
+        <th>✓</th>
+        <th>
+            <a href="?{% for k, v in request.args.items() if k != 'sort_by' and k != 'order' %}{{ k }}={{ v }}&{% endfor %}sort_by=provider&order={{ 'desc' if sort_by == 'provider' and order == 'asc' else 'asc' }}">
+                Anbieter {% if sort_by == 'provider' %}{{ '↑' if order == 'asc' else '↓' }}{% endif %}
+            </a>
+        </th>
+        <th>
+            <a href="?{% for k, v in request.args.items() if k != 'sort_by' and k != 'order' %}{{ k }}={{ v }}&{% endfor %}sort_by=service&order={{ 'desc' if sort_by == 'service' and order == 'asc' else 'asc' }}">
+                Service {% if sort_by == 'service' %}{{ '↑' if order == 'asc' else '↓' }}{% endif %}
+            </a>
+        </th>
+        <th>
+            <a href="?{% for k, v in request.args.items() if k != 'sort_by' and k != 'order' %}{{ k }}={{ v }}&{% endfor %}sort_by=sku&order={{ 'desc' if sort_by == 'sku' and order == 'asc' else 'asc' }}">
+                SKU {% if sort_by == 'sku' %}{{ '↑' if order == 'asc' else '↓' }}{% endif %}
+            </a>
+        </th>
+        <th>
+            <a href="?{% for k, v in request.args.items() if k != 'sort_by' and k != 'order' %}{{ k }}={{ v }}&{% endfor %}sort_by=resource_name&order={{ 'desc' if sort_by == 'resource_name' and order == 'asc' else 'asc' }}">
+                Resource Name {% if sort_by == 'resource_name' %}{{ '↑' if order == 'asc' else '↓' }}{% endif %}
+            </a>
+        </th>
+        <th>
+            <a href="?{% for k, v in request.args.items() if k != 'sort_by' and k != 'order' %}{{ k }}={{ v }}&{% endfor %}sort_by=region&order={{ 'desc' if sort_by == 'region' and order == 'asc' else 'asc' }}">
+                Region {% if sort_by == 'region' %}{{ '↑' if order == 'asc' else '↓' }}{% endif %}
+            </a>
+        </th>
+        <th>
+            <a href="?{% for k, v in request.args.items() if k != 'sort_by' and k != 'order' %}{{ k }}={{ v }}&{% endfor %}sort_by=price_per_unit&order={{ 'desc' if sort_by == 'price_per_unit' and order == 'asc' else 'asc' }}">
+                Preis {% if sort_by == 'price_per_unit' %}{{ '↑' if order == 'asc' else '↓' }}{% endif %}
+            </a>
+        </th>
+        <th>Einheit</th>
+        <th>Währung</th>
+    </tr>
+        {% for row in prices %}
+        <tr>
+            <td>
+                <input type="checkbox" name="ids" value="{{ row.id }}" onclick="handleCheckbox(this)">
+            </td>
+            <td>{{ row.provider }}</td>
+            <td>{{ row.service }}</td>
+            <td>{{ row.sku }}</td>
+            <td>{{ row.resource_name }}</td>
+            <td>{{ row.region }}</td>
+            <td>{{ row.price_per_unit }}</td>
+            <td>{{ row.unit }}</td>
+            <td>{{ row.currency }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button type="submit" id="compareBtn" disabled>🔍 Vergleichen</button>
+    </form>
+    <div style="margin-top: 20px;">
+        {% if page > 1 %}
+            <a href="/?page={{ page - 1 }}">⬅️ Zurück</a>
+        {% endif %}
+
+        <span>Seite {{ page }} von {{ total_pages }}</span>
+
+        {% if page < total_pages %}
+            <a href="/?page={{ page + 1 }}">Weiter ➡️</a>
+        {% endif %}
+    </div>
+    <script>
+        const STORAGE_KEY = "selected_ids";
+
+        function getStoredSelection() {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        }
+
+        function updateStoredSelection(selectedIds) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(selectedIds));
+        }
+
+        function handleCheckbox(checkbox) {
+            let selectedIds = getStoredSelection();
+
+                if (checkbox.checked) {
+                if (selectedIds.length >= 2) {
+                checkbox.checked = false;
+                alert("Bitte nur zwei Zeilen auswählen.");
+            return;
+            }
+            selectedIds.push(checkbox.value);
+        } else {
+            selectedIds = selectedIds.filter(id => id !== checkbox.value);
+        }
+
+            updateStoredSelection(selectedIds);
+            updateCompareForm(selectedIds);
+        }
+
+        function updateCompareForm(selectedIds) {
+            const compareBtn = document.getElementById('compareBtn');
+            const form = document.getElementById('compareForm');
+
+            compareBtn.disabled = selectedIds.length !== 2;
+
+            // alte hidden inputs entfernen
+            form.querySelectorAll('input[type="hidden"]').forEach(el => el.remove());
+
+            // neue hinzufügen
+            selectedIds.forEach(id => {
+            const hidden = document.createElement("input");
+            hidden.type = "hidden";
+            hidden.name = "ids";
+            hidden.value = id;
+            form.appendChild(hidden);
+            });
+        }
+
+        function restoreCheckboxSelection() {
+            const selectedIds = getStoredSelection();
+            const checkboxes = document.querySelectorAll('input[name="ids"]');
+            checkboxes.forEach(cb => {
+        if (selectedIds.includes(cb.value)) {
+            cb.checked = true;
+        }
+        });
+            pdateCompareForm(selectedIds);
+        }
+
+            window.addEventListener('DOMContentLoaded', () => {
+            restoreCheckboxSelection();
+        });
+
+        function clearSelection() {
+            // Speicher löschen
+            localStorage.removeItem(STORAGE_KEY);
+
+            // Alle Checkboxen abhaken
+            const checkboxes = document.querySelectorAll('input[name="ids"]');
+            checkboxes.forEach(cb => cb.checked = false);
+
+            // Button deaktivieren & hidden inputs entfernen
+            updateCompareForm([]);
+        }
+
+    </script>
+
+
+</body>
+</html>

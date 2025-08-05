@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vergleich</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h2>🔍 Vergleich der ausgewählten Instanzen</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Attribut</th>
+                <th>Anbieter A</th>
+                <th>Anbieter B</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key in item1.keys() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ item1[key] }}</td>
+                <td>{{ item2[key] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        localStorage.removeItem("selected_ids");
+    </script>
+
+</body>
+</html>
