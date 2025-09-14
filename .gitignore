@@ -1,4 +1,23 @@
-*.mysql
+# Python-Cache & Bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtuelle Umgebungen
+.venv/
+venv/
+
+# Umgebungsvariablen (DB-Passwörter etc.)
+.env
+.env.*
+
+# macOS-Systemdateien
+.DS_Store
+
+# Logs & Ausgaben
+logs/
+*.log
 
 
 
