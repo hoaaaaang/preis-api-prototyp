@@ -1,0 +1,84 @@
+th a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+th a:hover {
+    border-color: #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.btn {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-blue {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-blue:hover {
+    background-color: #0056b3;
+}
+
+
+.provider-buttons {
+  display: flex;
+  justify-content: center;     
+  gap: 12px;                   
+  flex-wrap: wrap;
+  margin: 10px 0 16px;
+}
+
+.pill {
+  appearance: none;
+  border: none;
+  padding: 10px 18px;          
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 999px;        
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06);
+  transition: transform .05s ease, box-shadow .2s ease, filter .15s ease;
+}
+
+.pill:hover { filter: brightness(1.05); box-shadow: 0 4px 10px rgba(0,0,0,.08); }
+.pill:active { transform: translateY(1px); }
+.pill:focus-visible { outline: 3px solid #111; outline-offset: 2px; }
+
+
+.pill-aws   { background: #FF9900; color: #111; }  /* AWS-Orange */
+.pill-azure { background: #0078D4; color: #fff; }  /* Azure-Blau */
+.pill-gcp   { background: #34A853; color: #fff; }  /* Google-Grün */
+.pill-reset { background: #f3f4f6; color: #111; }  /* neutral */
+
+
+.pill[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 3px rgba(255,255,255,.5);
+  outline: 2px solid rgba(0,0,0,.2);
+}
+
+.spacer{ height: 24px; }
+
+

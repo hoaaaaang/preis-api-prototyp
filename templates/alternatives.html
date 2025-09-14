@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Alternativen – {{ base.provider }} {{ base.resource_name or base.sku }}</title>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    table { border-collapse: collapse; width: 100%; font-size: 14px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f4f4f4; }
+    .is-base { background: #fafafa; font-weight: 600; }
+    .delta { padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .delta--down { background: #e8f5e9; color: #1b5e20; }  
+    .delta--up   { background: #ffebee; color: #b71c1c; }  
+    .delta--same { background: #f3f4f6; color: #111827; }
+    .sub { font-size: 12px; color: #555; margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <h2>Alternativen zu: {{ base.provider }} – {{ base.resource_name or base.sku }} ({{ base.region }})</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Instanz</th>
+        <th>Region</th>
+        <th>Preis / Einheit</th>
+        <th>Preisunterschied</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for it in items %}
+      <tr class="{{ 'is-base' if it.id == base.id }}">
+        <td>
+          {{ it.provider }}
+          {% if it.resource_name %} {{ it.resource_name }}{% endif %}
+          {% if it.sku %}<div class="sub">{{ it.sku }}</div>{% endif %}
+          {% if it.unit %}<div class="sub">{{ it.unit }}{% if it.currency %} · {{ it.currency }}{% endif %}</div>{% endif %}
+        </td>
+        <td>{{ it.region }}</td>
+        <td>{{ (it.price_per_unit or 0) | round(6) }}</td>
+        <td>
+          {% if it.delta_dir == 'down' %}
+            <span class="delta delta--down">−{{ (it.delta_pct|float)|round(1) }}%</span>
+          {% elif it.delta_dir == 'up' %}
+            <span class="delta delta--up">+{{ (it.delta_pct|float)|round(1) }}%</span>
+          {% else %}
+            <span class="delta delta--same">0%</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p style="text-align:center;">
+    <a href="{{ url_for('export_alternatives', entry_id=base.id, fmt='csv') }}"
+      style="display:inline-block;padding:8px 12px;background-color:#007bff;color:#fff;border:1px solid #007bff;border-radius:6px;text-decoration:none;">
+      CSV Download
+    </a>
+    <a href="{{ url_for('export_alternatives', entry_id=base.id, fmt='pdf') }}"
+      style="display:inline-block;padding:8px 12px;background-color:#007bff;color:#fff;border:1px solid #007bff;border-radius:6px;margin-left:8px;text-decoration:none;">
+      PDF Download
+    </a>
+  </p>
+
+</body>
+</html>
